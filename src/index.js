@@ -1,9 +1,12 @@
-const path = require('path')
-const fn = require('./funcoes')
+const { clear } = require("console");
+const path = require("path");
+const fn = require("./funcoes");
 
-const caminho = path.join(__dirname, '..', 'dados', 'legendas')
+const caminho = path.join(__dirname, "..", "dados", "legendas");
 
-
-const arquivos =  fn.lerDiretorio(caminho)
-
-console.log(arquivos)
+fn.lerDiretorio(caminho)
+  .then(arquivos => fn.elementosTerminadosCom(arquivos, ".srt"))
+  .then(arquivosSRT => fn.lerArquivos(arquivosSRT))
+  .then(conteudos => conteudos.join('\n'))
+  .then(todoConteudo => todoConteudo.split('\n'))
+  .then(console.log)
