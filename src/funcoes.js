@@ -56,15 +56,26 @@ function removerElementosSeApenasNumero(array) {
 
 // split serve para remover o elemento e o join unir com um espaco
 function removerSimbolos(simbolos) {
-    return function(array) {
+  return function (array) {
       return array.map(el => {
-          let novoTexto = el
-          simbolos.forEach(simbolo => {
-             novoTexto = novoTexto.split(simbolo).join('')
-          })
+          return simbolos.reduce((acc, simbolo) => {
+              return acc.split(simbolo).join('')
+          }, el)
       })
-    }
+  }
 }
+
+function mesclarElementos(array) {
+  return array.join(' ')
+}
+
+function separarTextoPor(simbolo) {
+  return function (texto) {
+      return texto.split(simbolo)
+  }
+}
+
+
 
 
 module.exports = {
@@ -74,5 +85,8 @@ module.exports = {
   lerArquivos,
   removerElementosSeVazio,
   removerElementosSeIncluir,
-  removerElementosSeApenasNumero
+  removerElementosSeApenasNumero,
+  removerSimbolos,
+  mesclarElementos,
+  separarTextoPor
 };
